@@ -52,6 +52,7 @@ def FindLostArkWindowAndFocus():
             w.setwindowhandle(i)
             w.set_foreground()
             return
+#This only work's if you compile it into an exe otherwise you have to change the searchstring
 def FocusConsoleOnClose():
     w = WindowMgr()
     appwindows = get_app_list()
