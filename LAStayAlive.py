@@ -5,7 +5,7 @@ import keyboard
 import time
 from os import system
 import win32gui, win32com.client
-import re
+
 screenWidth, screenHeight = pyautogui.size()
 random.seed()
 startedflag = False
@@ -13,7 +13,7 @@ clickCounter = 0
 startTime = 0
 shell = win32com.client.Dispatch("WScript.Shell")
 shell.SendKeys('%')
-system('mode con: cols=75 lines=10')
+
 class WindowMgr:
     """Encapsulates some calls to the winapi for window management"""
 
@@ -47,8 +47,16 @@ def FindLostArkWindowAndFocus():
     w = WindowMgr()
     appwindows = get_app_list()
     for i in appwindows:
-        print(i)
         result = i[1].find('LOST ARK')
+        if result != -1:
+            w.setwindowhandle(i)
+            w.set_foreground()
+            return
+def FocusConsoleOnClose():
+    w = WindowMgr()
+    appwindows = get_app_list()
+    for i in appwindows:
+        result = i[1].find('LAStay')
         if result != -1:
             w.setwindowhandle(i)
             w.set_foreground()
@@ -88,12 +96,13 @@ while 1:
         if i % 60 == 0:
             PrintInfo()
         if keyboard.is_pressed('esc'):
+            FocusConsoleOnClose()
             print("\nProgram Exited!")
             sleep(2)
             exit()
-    FindLostArkWindowAndFocus()
+    FindLostArkWindowAndFocus() #Some of my friends really pulled of the impossible and Lost Ark had no focus or lost it during the AFK-time so calling the Focus before clicking...
     sleep(0.1)
     pyautogui.click(button='right')
-    pyautogui.click()
+    pyautogui.click() #clicking left and right mousebutton because there is movement option for both
     clickCounter += 1
     
