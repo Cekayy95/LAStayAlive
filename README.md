@@ -8,3 +8,13 @@ i would love that you only use this script if your server-queue's are higher tha
 # Installation
 You can either start this script via your prefered IDE or via the console.
 There is a way to compile python scripts to .exe via auto-py-to-exe
+
+# Installation Process
+
+First you need to install all missing packages
+via commandline:
+pip3 install -r .\requirements.txt
+
+## Creating the .exe
+
+See => [auto-py-to-exe](https://pypi.org/project/auto-py-to-exe/).
